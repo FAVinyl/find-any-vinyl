@@ -1,0 +1,60 @@
+body {
+    font-family: sans-serif;
+    background: #111;
+    color: #eee;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  form {
+    margin-bottom: 2rem;
+  }
+  
+  input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 250px;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .card {
+    background: #222;
+    padding: 1rem;
+    width: 250px;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .card a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #00f0ff;
+    text-decoration: none;
+  }
+  
+  .no-image {
+    background: #444;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+  
