@@ -79,6 +79,35 @@ app.post('/search', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+aimport express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createServer } from '@vercel/node';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.urlencoded({ extended: true }));
+
+const vinyls = [
+  'Daft Punk – Homework',
+  'Massive Attack – Mezzanine'
+  // etc.
+];
+
+app.get('/', (req, res) => {
+  res.render('index', { result: null });
 });
+
+app.post('/search', (req, res) => {
+  const query = req.body.query?.toLowerCase() || '';
+  const result = vinyls.filter(item => item.toLowerCase().includes(query));
+  res.render('index', { result });
+});
+
+export default app;

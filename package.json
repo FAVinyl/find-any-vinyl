@@ -2,6 +2,7 @@
   "name": "find-any-vinyl",
   "version": "1.0.0",
   "description": "Starter project for Find Any Vinyl",
+  "type": "module",
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js"
