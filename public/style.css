@@ -90,10 +90,12 @@ button:hover {
   transform: scale(1.03);
 }
 
-.card img {
+..card img {
   width: 100%;
-  height: 280px;
-  object-fit: cover;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  background-color: #222;
 }
 
 .no-image {
@@ -107,7 +109,7 @@ button:hover {
 }
 
 .card-content {
-  padding: 15px;
+  padding: 10px;
 }
 
 .card-content h2 {
