@@ -90,13 +90,18 @@ button:hover {
   transform: scale(1.03);
 }
 
-..card img {
+.card img {
   width: 100%;
   height: auto;
   max-height: 280px;
   object-fit: contain;
-  background-color: #222;
+  background-color: #1a1a1a;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  border-bottom: 1px solid #333;
 }
+
 
 .no-image {
   width: 100%;
