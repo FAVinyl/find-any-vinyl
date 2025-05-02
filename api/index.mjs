@@ -46,7 +46,7 @@ app.post('/search', (req, res) => {
         const result = JSON.parse(data);
         const vinyls = result.results.map(r => ({
           title: r.title,
-          thumb: r.thumb,
+          thumb: r.cover_image || r.thumb,
           year: r.year,
           format: r.format?.[0] || '',
           label: r.label?.[0] || '',

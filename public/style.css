@@ -91,6 +91,7 @@ button:hover {
 }
 
 .card img {
+  image-rendering: auto;
   width: 100%;
   height: auto;
   max-height: 280px;
@@ -101,7 +102,6 @@ button:hover {
   padding: 10px;
   border-bottom: 1px solid #333;
 }
-
 
 .no-image {
   width: 100%;
