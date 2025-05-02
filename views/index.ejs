@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find Any Vinyl</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>Find Any Vinyl</h1>
+  <header>
+    <h1>Find Any Vinyl</h1>
+    <p class="tagline">Search the world's vinyl releases</p>
+  </header>
 
-  <form method="POST" action="/search">
-    <input type="text" name="query" placeholder="Search artist or album..." required />
-    <button type="submit">Search</button>
-  </form>
+  <main>
+    <form action="/search" method="POST">
+      <input type="text" name="query" placeholder="Search by artist or album..." required />
+      <button type="submit">Search</button>
+    </form>
 
-  <div class="results">
-    <% if (result && result.length > 0) { %>
-      <% result.forEach(item => { %>
-        <div class="card">
-          <% if (item.thumb) { %>
-            <img src="<%= item.thumb %>" alt="Cover">
-          <% } else { %>
-            <div class="no-image">No Image</div>
-          <% } %>
-          <h2><%= item.title %></h2>
-          <p><%= item.format %> | <%= item.year %></p>
-          <p><%= item.label %></p>
-          <a href="https://www.discogs.com<%= item.url %>" target="_blank">View on Discogs</a>
-          <a href="https://www.ebay.co.uk/sch/i.html?_nkw=<%= encodeURIComponent(item.title + ' vinyl') %>" target="_blank">Search on eBay</a>
-        </div>
-      <% }); %>
-    <% } else if (result) { %>
-      <p>No results found.</p>
-    <% } %>
-  </div>
+    <div class="results">
+      <% if (result && result.length > 0) { %>
+        <% result.forEach(item => { %>
+          <div class="card">
+            <% if (item.thumb) { %>
+              <img src="<%= item.thumb %>" alt="Vinyl Cover" />
+            <% } else { %>
+              <div class="no-image">No image</div>
+            <% } %>
+            <div class="card-content">
+              <h2><%= item.title %></h2>
+              <p><%= item.format %> | <%= item.year %></p>
+              <p><%= item.label %></p>
+              <div class="buttons">
+                <a href="https://www.discogs.com<%= item.url %>" target="_blank">View on Discogs</a>
+                <a href="https://www.ebay.co.uk/sch/i.html?_nkw=<%= encodeURIComponent(item.title + ' vinyl') %>" target="_blank">Search on eBay</a>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } else if (result) { %>
+        <p class="no-results">No results found.</p>
+      <% } %>
+    </div>
+  </main>
+
+  <footer>
+    <p>Powered by Discogs API</p>
+  </footer>
 </body>
 </html>
