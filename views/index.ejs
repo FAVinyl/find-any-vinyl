@@ -8,17 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>Find Any Vinyl</h1>
-    <p class="tagline">Search the world's vinyl releases</p>
+  <header class="hero">
+    <h1 class="gradient-text">FIND ANY VINYL</h1>
+    <div class="vinyl-icon"></div>
+    <form action="/search" method="POST" class="neon-search">
+      <input type="text" name="query" placeholder="Search for an artist, album, or song" required />
+      <button type="submit">Search</button>
+    </form>
   </header>
 
   <main>
-    <form action="/search" method="POST">
-      <input type="text" name="query" placeholder="Search by artist or album..." required />
-      <button type="submit">Search</button>
-    </form>
-
     <div class="results">
       <% if (result && result.length > 0) { %>
         <% result.forEach(item => { %>
