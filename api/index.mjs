@@ -27,7 +27,7 @@ app.post('/search', (req, res) => {
 
   const options = {
     hostname: 'api.discogs.com',
-    path: `/database/search?q=${encodeURIComponent(query)}&token=ZsXMxGGPWnzyycHnrimUVViCQWAtustyttiVrHXz`,
+    path: `/database/search?q=${encodeURIComponent(query)}&format=vinyl&type=release&token=ZsXMxGGPWnzyycHnrimUVViCQWAtustyttiVrHXz`,
     method: 'GET',
     headers: {
       'User-Agent': 'FindAnyVinylApp/1.0'
