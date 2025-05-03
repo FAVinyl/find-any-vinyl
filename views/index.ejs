@@ -33,7 +33,7 @@
               <p><%= item.label %></p>
               <div class="buttons">
                 <a href="https://www.discogs.com<%= item.url %>" target="_blank">View on Discogs</a>
-                <a href="https://rover.ebay.com/rover/1/711-53200-19255-0/1?ff3=4&pub=5339109462&toolid=10001&campid=5339109462&customid=findanyvinyl&mpre=<%= encodeURIComponent('https://www.ebay.co.uk/sch/i.html?_nkw=' + encodeURIComponent(item.title + ' vinyl')) %>" target="_blank">Search on eBay</a>
+                <a href="https://rover.ebay.com/rover/1/711-53200-19255-0/1?ff3=4&pub=5339109462&toolid=10001&campid=5339109462&customid=findanyvinyl&mpre=https%3A%2F%2Fwww.ebay.co.uk%2Fsch%2Fi.html%3F_nkw%3D<%= encodeURIComponent(item.title + ' vinyl') %>" target="_blank">Search on eBay</a>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
   </main>
 
   <footer>
-    <p>Powered by Discogs API</p>
+    <p>Powered by Discogs API Built by a Manc</p>
   </footer>
 </body>
 </html>
