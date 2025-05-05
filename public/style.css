@@ -251,3 +251,51 @@ footer {
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
 }
+/* Neon glow ring behind search bar */
+.neon-search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+  z-index: 1;
+}
+
+.neon-search::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,255,0.15) 0%, rgba(0,255,255,0.03) 80%, transparent 100%);
+  box-shadow:
+    0 0 20px rgba(0,255,255,0.2),
+    0 0 40px rgba(0,255,255,0.1);
+  z-index: -1;
+}
+
+/* Keep existing input/button style but center them */
+.neon-search input[type="text"] {
+  padding: 12px 16px;
+  width: 320px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 1rem;
+}
+
+.neon-search button {
+  padding: 12px 20px;
+  background-color: #00ffe1;
+  color: #000;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.neon-search button:hover {
+  background-color: #00ccbe;
+}
