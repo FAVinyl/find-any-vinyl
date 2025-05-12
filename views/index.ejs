@@ -75,8 +75,9 @@
     }
   </script>
 
-  <!-- GA4: Track outbound clicks -->
-  <script>
+ <!-- GA4: Track outbound clicks -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.buttons a').forEach(link => {
       link.addEventListener('click', () => {
         if (typeof gtag === 'function') {
@@ -87,7 +88,8 @@
         }
       });
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
