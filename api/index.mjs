@@ -70,6 +70,9 @@ app.post('/search', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/sitemap.xml'));
 });
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/robots.txt'));
+});
 // Catch-all route for 404s
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, '../public/404.html'));
