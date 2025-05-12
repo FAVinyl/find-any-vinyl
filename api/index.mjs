@@ -67,6 +67,10 @@ app.post('/search', (req, res) => {
 
   request.end();
 });
+// Catch-all route for 404s
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '../public/404.html'));
+});
 
 // Export the app for Vercel
 export default app;
