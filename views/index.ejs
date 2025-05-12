@@ -76,15 +76,26 @@
     }
   </script>
 
- <!-- GA4: Track outbound clicks -->
+ <!-- GA4: Track outbound clicks with destination split -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.buttons a').forEach(link => {
       link.addEventListener('click', () => {
+        const hostname = new URL(link.href).hostname.toLowerCase();
+
+        let destination = 'Other';
+        if (hostname.includes('discogs.com')) {
+          destination = 'Discogs';
+        } else if (hostname.includes('ebay.')) {
+          destination = 'eBay';
+        } else if (hostname.includes('cdandlp.')) {
+          destination = 'CDandLP';
+        }
+
         if (typeof gtag === 'function') {
-          gtag('event', 'outbound_click', {
-            destination: link.href,
-            label: link.textContent.trim()
+          gtag('event', 'click_outbound_link', {
+            destination_site: destination,
+            link_url: link.href
           });
         }
       });
