@@ -59,6 +59,35 @@
   <footer>
     <p>Powered by Discogs API · Built by a Manc</p>
   </footer>
+  <!-- GA4: Track searches -->
+  <script>
+    const searchForm = document.querySelector('form');
+    const searchInput = document.querySelector('input[name="query"]');
+
+    if (searchForm) {
+      searchForm.addEventListener('submit', () => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'search', {
+            search_term: searchInput.value
+          });
+        }
+      });
+    }
+  </script>
+
+  <!-- GA4: Track outbound clicks -->
+  <script>
+    document.querySelectorAll('.buttons a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'outbound_click', {
+            destination: link.href,
+            label: link.textContent.trim()
+          });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
-
