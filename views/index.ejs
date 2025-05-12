@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Find Any Vinyl</title>
-  <link rel="stylesheet" href="/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Any Vinyl | Search and Buy Vinyl Records Online</title>
+    <meta name="description" content="Find Any Vinyl lets you search the world's vinyl releases in one place. Instantly compare listings from Discogs and eBay, discover rare pressings, and explore every genre.">
+    <meta name="keywords" content="vinyl, records, LPs, Discogs, eBay, buy vinyl, rare records, albums, music, turntable">
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://findanyvinyl.com/" />
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  </head>  
 <body>
   <header class="hero">
     <h1 class="gradient-text">FIND ANY VINYL</h1>
@@ -23,7 +27,7 @@
         <% result.forEach(item => { %>
           <div class="card">
             <% if (item.thumb) { %>
-              <img src="<%= item.thumb %>" alt="Vinyl Cover" />
+              <img src="<%= item.thumb %>" alt="<%= item.title %> vinyl cover" />
             <% } else { %>
               <div class="no-image">No image</div>
             <% } %>
