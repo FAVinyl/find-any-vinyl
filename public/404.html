@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>404 Not Found - Find Any Vinyl</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #00ffe1;
+    }
+    p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+    form input[type="text"] {
+      padding: 12px;
+      width: 300px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    form button {
+      padding: 12px 20px;
+      background-color: #00ffe1;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    form button:hover {
+      background-color: #00ccbe;
+    }
+  </style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>Oops! That page doesn't exist.</p>
+  <p>Try searching for an artist, album, or vinyl below:</p>
+
+  <form action="/search" method="POST">
+    <input type="text" name="query" placeholder="Search by artist or album..." required />
+    <button type="submit">Search</button>
+  </form>
+</body>
+</html>
