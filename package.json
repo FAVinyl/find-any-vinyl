@@ -7,7 +7,8 @@
     "dev": "node api/index.mjs"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "ejs": "^3.1.10"
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^4.18.2"
   }
 }

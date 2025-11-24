@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>eBay results for "<%= query %>"</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="page">
+    <h1>eBay results for "<%= query %>"</h1>
+
+    <% if (!items || !items.length) { %>
+      <p>No eBay matches found.</p>
+    <% } else { %>
+      <ul class="results-grid">
+        <% items.forEach(item => { %>
+          <li class="result-card">
+            <% if (item.image) { %>
+              <img src="<%= item.image %>" alt="<%= item.title %>" />
+            <% } %>
+            <h2><a href="<%= item.url %>" target="_blank"><%= item.title %></a></h2>
+            <% if (item.price) { %>
+              <p><strong><%= item.price %> <%= item.currency %></strong></p>
+            <% } %>
+            <% if (item.condition) { %>
+              <p><%= item.condition %></p>
+            <% } %>
+            <% if (item.seller) { %>
+              <p class="seller">Seller: <%= item.seller %></p>
+            <% } %>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </main>
+</body>
+</html>

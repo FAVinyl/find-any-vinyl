@@ -2,105 +2,422 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Find Any Vinyl | Search and Buy Vinyl Records Online</title>
-    <meta name="description" content="Find Any Vinyl lets you search the world's vinyl releases in one place. Instantly compare listings from Discogs and eBay, discover rare pressings, and explore every genre.">
-    <meta name="keywords" content="vinyl, records, LPs, Discogs, eBay, buy vinyl, rare records, albums, music, turntable">
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://findanyvinyl.com/" />
-    <link rel="stylesheet" href="/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BLWTZKH573"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-BLWTZKH573');
-</script> 
-  </head>  
-<body>
-  <header class="hero">
-    <h1 class="gradient-text">FIND ANY VINYL</h1>
-    <div class="vinyl-icon"></div>
-    <form action="/search" method="POST" class="neon-search">
-      <input type="text" name="query" placeholder="Search for an artist, album, or song" required />
-      <button type="submit">Search</button>
-    </form>
-  </header>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Find Any Vinyl | Discover Your Next Favorite Record</title>
 
-  <main>
-    <div class="results">
-      <% if (result && result.length > 0) { %>
-        <% result.forEach(item => { %>
-          <div class="card">
-            <% if (item.thumb) { %>
-              <img src="<%= item.thumb %>" alt="<%= item.title %> vinyl cover" />
-            <% } else { %>
-              <div class="no-image">No image</div>
-            <% } %>
-            <div class="card-content">
-              <h2><%= item.title %></h2>
-              <p><%= item.format %> | <%= item.year %></p>
-              <p><%= item.label %></p>
-              <div class="buttons">
-                  <a href="https://www.discogs.com<%= item.url %>" target="_blank">View on Discogs</a>
-                  <a href="https://www.ebay.co.uk/sch/i.html?_nkw=<%= encodeURIComponent(item.title + ' vinyl') %>&campid=5339109462&customid=findanyvinyl" target="_blank">Search on eBay</a>
-              </div>
+    <meta
+      name="description"
+      content="Find Any Vinyl lets you search vinyl records across Discogs and eBay. Explore classic albums, rare pressings, and new favourites in one place."
+    />
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+    <link rel="canonical" href="https://findanyvinyl.com/" />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BLWTZKH573"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-BLWTZKH573');
+    </script>
+  </head>
+
+  <body>
+    <!-- Header / nav -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">Find Any Vinyl</a>
+
+        <nav class="main-nav">
+          <a href="#results">Results</a>
+          <a href="#featured">Featured artist</a>
+          <a href="#genres">Genres</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-media">
+        <img
+          src="/images/hero-turntable.jpg"
+          alt="Turntable playing a vinyl record with a sleeve on a wooden surface"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content container">
+        <p class="hero-eyebrow">VINYL DISCOVERY ENGINE</p>
+        <h1 class="hero-title">
+          Discover your next<br />
+          favourite record
+        </h1>
+        <p class="hero-subtitle">
+          Search vinyl across Discogs and eBay by artist, album, or track.
+        </p>
+
+        <form
+          action="/search"
+          method="GET"
+          class="search-bar"
+          role="search"
+        >
+          <label for="search-query" class="visually-hidden">
+            Search for an artist, album, or song
+          </label>
+          <input
+            id="search-query"
+            type="text"
+            name="query"
+            placeholder="Search for albums, artists, or tracks"
+            value="<%= typeof query !== 'undefined' ? query : '' %>"
+            required
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <main>
+      <!-- Results -->
+      <section id="results" class="results-section container">
+        <% if (query && result && result.length > 0) { %>
+          <div class="section-header">
+            <h2>Search results</h2>
+            <p class="section-subtitle">
+              Showing matches for "<span><%= query %></span>"
+            </p>
+          </div>
+
+          <div class="results-grid">
+            <% result.forEach(item => { %>
+              <article class="record-card">
+                <div class="record-image-wrapper">
+                  <% if (item.thumb) { %>
+                    <img
+                      src="<%= item.thumb %>"
+                      alt="<%= item.title %> vinyl release"
+                      loading="lazy"
+                    />
+                  <% } else { %>
+                    <div class="record-no-image">No image</div>
+                  <% } %>
+                </div>
+
+                <div class="record-body">
+                  <h3 class="record-title"><%= item.title %></h3>
+
+                  <% const metaBits = []; %>
+                  <% if (item.format) { metaBits.push(item.format); } %>
+                  <% if (item.year) { metaBits.push(item.year); } %>
+
+                  <% if (metaBits.length > 0) { %>
+                    <p class="record-meta"><%= metaBits.join(' • ') %></p>
+                  <% } %>
+
+                  <% if (item.label) { %>
+                    <p class="record-label"><%= item.label %></p>
+                  <% } %>
+
+                  <div class="record-actions">
+                    <% if (item.url && item.url !== '#') { %>
+                      <a
+                        href="https://www.discogs.com<%= item.url %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="button button-primary"
+                      >
+                        View on Discogs
+                      </a>
+                    <% } %>
+
+                    <a
+                      href="https://www.ebay.co.uk/sch/i.html?_nkw=<%= encodeURIComponent(item.title + ' vinyl') %>&campid=5339109462&customid=findanyvinyl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="button button-secondary"
+                    >
+                      Search on eBay
+                    </a>
+                  </div>
+                </div>
+              </article>
+            <% }); %>
+          </div>
+
+        <% } else if (query && result && result.length === 0) { %>
+          <div class="no-results-wrapper">
+            <p class="no-results-text">
+              No results found. Try another search term or check your spelling.
+            </p>
+          </div>
+        <% } %>
+      </section>
+
+      <!-- eBay live listings (Option C) -->
+      <% if (query && ebayResults && ebayResults.length > 0) { %>
+        <section class="results-section container ebay-results-section">
+          <div class="section-header">
+            <h2>Also available on eBay</h2>
+            <p class="section-subtitle">
+              Live listings matching "<span><%= query %></span>" from eBay sellers.
+            </p>
+          </div>
+
+          <div class="results-grid">
+            <% ebayResults.forEach(item => { %>
+              <article class="record-card record-card--ebay">
+                <div class="record-image-wrapper">
+                  <% if (item.image) { %>
+                    <img
+                      src="<%= item.image %>"
+                      alt="<%= item.title %> vinyl listing on eBay"
+                      loading="lazy"
+                    />
+                  <% } else { %>
+                    <div class="record-no-image">No image</div>
+                  <% } %>
+                </div>
+
+                <div class="record-body">
+                  <h3 class="record-title">
+                    <a
+                      href="<%= item.url %>"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <%= item.title %>
+                    </a>
+                  </h3>
+
+                  <p class="record-meta">
+                    <% if (item.price) { %>
+                      <span class="record-price"><%= item.price %> <%= item.currency %></span>
+                    <% } %>
+                    <% if (item.condition) { %>
+                      <span class="meta-separator">•</span>
+                      <span class="record-condition"><%= item.condition %></span>
+                    <% } %>
+                  </p>
+
+                  <% if (item.seller) { %>
+                    <p class="record-label">
+                      Seller: <%= item.seller %>
+                    </p>
+                  <% } %>
+
+                  <div class="record-actions">
+                    <a
+                      href="<%= item.url %>"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="button button-primary"
+                    >
+                      View on eBay
+                    </a>
+                    <span class="source-pill">From eBay</span>
+                  </div>
+                </div>
+              </article>
+            <% }); %>
+          </div>
+        </section>
+      <% } %>
+
+      <!-- Featured Artist: The Stone Roses / Mani -->
+      <section id="featured" class="section section-featured-artist">
+        <div class="container featured-artist-layout">
+          <div class="featured-artist-text">
+            <p class="section-kicker">Featured artist</p>
+            <h2 class="section-title">Remembering Mani: The Groove That Changed British Music</h2>
+
+            <p class="section-intro">
+              There are bass players… and then there was Mani. A musician who didn’t just hold the rhythm
+              together — he set it free. The Stone Roses’ sound, that shimmering mix of swagger,
+              psychedelia, and sheer Manchester magic, simply wouldn’t have existed without his
+              unmistakable low-end pulse.
+            </p>
+
+            <p>
+              From the first notes of <em>I Wanna Be Adored</em> to the euphoric sprawl of
+              <em>Fools Gold</em>, Mani’s basslines weren’t just parts in a song — they were the engine.
+              Warm, rolling, hypnotic. The kind of grooves you feel in your chest before you even notice
+              the drums have joined in.
+            </p>
+
+            <p>
+              As the music world reflects on his passing, the records remain — spinning with the same
+              electricity, swagger, and sense of possibility he brought to every stage.
+            </p>
+
+            <a href="/search?query=the%20stone%20roses%20vinyl" class="btn btn-primary">
+              Celebrate Mani — Discover Stone Roses Vinyl
+            </a>
+          </div>
+
+          <div class="featured-artist-media">
+            <div class="featured-artist-image">
+              <picture>
+                <source srcset="/images/featured-stone-roses.webp" type="image/webp" />
+                <img
+                  src="/images/featured-stone-roses.jpg"
+                  alt="The Stone Roses performing live at Spike Island"
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
-        <% }); %>
-      <% } else if (result) { %>
-        <p class="no-results">No results found.</p>
-      <% } %>
-    </div>
-  </main>
+        </div>
+      </section>
 
-  <footer>
-    <p>Powered by Discogs API · Built by a Manc</p>
-  </footer>
-  <!-- GA4: Track searches -->
-  <script>
-    const searchForm = document.querySelector('form');
-    const searchInput = document.querySelector('input[name="query"]');
+      <!-- Browse by Genre -->
+      <section id="genres" class="section section-genres">
+        <div class="container">
+          <p class="section-kicker">Browse by genre</p>
+          <h2 class="section-title">Dig by sound, not just by name</h2>
 
-    if (searchForm) {
-      searchForm.addEventListener('submit', () => {
-        if (typeof gtag === 'function') {
+          <div class="genre-grid">
+            <a href="/genre/indie" class="genre-card">
+              <span class="genre-label">Indie</span>
+              <span class="genre-subtitle">Jangle, anthems & basement shows</span>
+            </a>
+
+            <a href="/genre/rock" class="genre-card">
+              <span class="genre-label">Rock</span>
+              <span class="genre-subtitle">From classic riffs to modern noise</span>
+            </a>
+
+            <a href="/genre/hip-hop" class="genre-card">
+              <span class="genre-label">Hip-Hop</span>
+              <span class="genre-subtitle">Beats, bars & sample culture</span>
+            </a>
+
+            <a href="/genre/electronic" class="genre-card">
+              <span class="genre-label">Electronic</span>
+              <span class="genre-subtitle">Synths, breaks & late-night journeys</span>
+            </a>
+
+            <a href="/genre/house" class="genre-card">
+              <span class="genre-label">House</span>
+              <span class="genre-subtitle">4/4, deep grooves & club history</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!<!-- Curated Picks (dynamic from Discogs masters, eBay affiliate links) -->
+      <section class="section section-curated-picks">
+        <div class="container">
+          <p class="section-kicker">Curated picks</p>
+          <h2 class="section-title">Records spinning for Mani this week</h2>
+      
+          <div class="record-grid">
+            <% if (curatedPicks && curatedPicks.length) { %>
+              <% curatedPicks.forEach(pick => { %>
+                <article class="record-card">
+                  <div class="record-cover">
+                    <% if (pick.coverUrl) { %>
+                      <img
+                        src="<%= pick.coverUrl %>"
+                        alt="<%= pick.title %> - <%= pick.artist %> vinyl cover"
+                        loading="lazy"
+                      />
+                    <% } else { %>
+                      <div class="record-no-image">No image</div>
+                    <% } %>
+                  </div>
+                  <div class="record-meta">
+                    <h3 class="record-title"><%= pick.title %></h3>
+                    <p class="record-artist"><%= pick.artist %></p>
+                    <% if (pick.note) { %>
+                      <p class="record-note"><%= pick.note %></p>
+                    <% } %>
+      
+                    <!-- eBay Affiliate Link -->
+                    <a
+                      href="https://www.ebay.co.uk/sch/i.html?_nkw=<%= encodeURIComponent(pick.title + ' ' + pick.artist + ' vinyl') %>&campid=5339109462&customid=findanyvinyl"
+                      target="_blank"
+                      class="record-link"
+                      rel="noopener noreferrer">
+                      View on eBay
+                    </a>
+                  </div>
+                </article>
+              <% }); %>
+            <% } else { %>
+              <p class="no-results-text">
+                Our curated picks will be spinning here soon.
+              </p>
+            <% } %>
+          </div>
+        </div>
+      </section>      
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Powered by the Discogs API · Built by a Manc</p>
+        <p class="footer-small">
+          Find Any Vinyl is an independent project and is not affiliated with Discogs or eBay.
+        </p>
+      </div>
+    </footer>
+
+    <!-- GA4: Track searches -->
+    <script>
+      const searchForm = document.querySelector('.search-bar');
+      const searchInput = document.querySelector('input[name="query"]');
+
+      if (searchForm && searchInput && typeof gtag === 'function') {
+        searchForm.addEventListener('submit', () => {
           gtag('event', 'search', {
             search_term: searchInput.value
           });
-        }
-      });
-    }
-  </script>
+        });
+      }
+    </script>
 
- <!-- GA4: Track outbound clicks with destination split -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.buttons a').forEach(link => {
-      link.addEventListener('click', () => {
-        const hostname = new URL(link.href).hostname.toLowerCase();
+    <!-- GA4: Track outbound clicks with destination split -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.record-actions a').forEach(link => {
+          link.addEventListener('click', () => {
+            const hostname = new URL(link.href).hostname.toLowerCase();
 
-        let destination = 'Other';
-        if (hostname.includes('discogs.com')) {
-          destination = 'Discogs';
-        } else if (hostname.includes('ebay.')) {
-          destination = 'eBay';
-        } else if (hostname.includes('cdandlp.')) {
-          destination = 'CDandLP';
-        }
+            let destination = 'Other';
+            if (hostname.includes('discogs.com')) {
+              destination = 'Discogs';
+            } else if (hostname.includes('ebay.')) {
+              destination = 'eBay';
+            }
 
-        if (typeof gtag === 'function') {
-          gtag('event', 'click_outbound_link', {
-            destination_site: destination,
-            link_url: link.href
+            if (typeof gtag === 'function') {
+              gtag('event', 'click_outbound_link', {
+                destination_site: destination,
+                link_url: link.href
+              });
+            }
           });
-        }
+        });
       });
-    });
-  });
-</script>
-
-</body>
+    </script>
+  </body>
 </html>
+
+
